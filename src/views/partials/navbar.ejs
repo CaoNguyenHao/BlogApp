@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/posts">BlogApp</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts">All Posts</a>
+                </li>
+
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts/new">Create Post</a>
+                    </li>
+                    <% } %>
+
+                        <% if (user?.role==='admin' ) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/posts">Pending Posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/users">User Management</a>
+                            </li>
+                            <% } %>
+            </ul>
+
+            <ul class="navbar-nav">
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/account">Hello, <%= user.name %></a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout?_method=POST" method="POST" class="d-inline">
+                            <button class="btn btn-sm btn-outline-light ms-2">Logout</button>
+                        </form>
+                    </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
