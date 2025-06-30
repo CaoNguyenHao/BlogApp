@@ -2,9 +2,14 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database.js';
 import bcrypt from 'bcrypt';
 
-class User extends Model {
+export class User extends Model {
     validPassword(password) {
         return bcrypt.compare(password, this.password);
+    }
+
+    static associate(models) {
+        User.hasMany(models.Post, { foreignKey: 'userId', as: 'posts' });
+        User.hasMany(models.Comment, { foreignKey: 'userId', as: 'comments' });
     }
 }
 
